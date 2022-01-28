@@ -46,19 +46,19 @@ async def clean(event, perm):
       return
     input_str = event.pattern_match.group(1)
     stats = "Group is clean."
-    deleted = 0
-
     if "clean" not in input_str:
-      zombies = await event.respond("Searching For Zombies/Deleted Accounts...")
-      async for user in event.client.iter_participants(event.chat_id):
+        zombies = await event.respond("Searching For Zombies/Deleted Accounts...")
+        deleted = 0
 
-            if user.deleted:
-                deleted += 1
-      if deleted > 0:
-            stats = f"Found **{deleted}** Zombies In This Group.\
+        async for user in event.client.iter_participants(event.chat_id):
+
+              if user.deleted:
+                  deleted += 1
+        if deleted > 0:
+              stats = f"Found **{deleted}** Zombies In This Group.\
             \nClean Them By Using - `/zombies clean`"
-      await zombies.edit(stats)
-      return
+        await zombies.edit(stats)
+        return
 
     cleaning_zombies = await event.respond("Cleaning Zombies/Deleted Accounts...")
     del_u = 0

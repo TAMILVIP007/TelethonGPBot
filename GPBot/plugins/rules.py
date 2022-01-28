@@ -14,15 +14,13 @@ async def rules(event):
         [Button.url("Chat Rules", "t.me/{}?start=rules".format(Config.BOT_US))
         ]])
         return
-        
+
     re = (await event.get_reply_message()).id
     await event.delete()
     await Stark.send_message(event.chat_id, "Please read the rules before chatting here!", buttons=[
     [Button.url("Chat Rules", "t.me/{}?start=rules".format(Config.BOT_US))
     ]], reply_to=re)
     return
-
-    await event.reply(RULES)
 
 @Stark.on(events.NewMessage(pattern="^/start rules"))
 async def rules(event):
